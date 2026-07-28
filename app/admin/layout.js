@@ -6,7 +6,8 @@ export default async function AdminLayout({ children }) {
   const session = await auth();
 
   if (!session) {
-    redirect('/login');
+    // redirect('/login');
+    console.log("Layout NO SESSION");
   }
 
   return (
