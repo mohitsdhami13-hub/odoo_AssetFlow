@@ -10,7 +10,7 @@ export default async function OrgSetupPage() {
   const session = await auth();
 
   if (!session || session.user.role !== 'ADMIN') {
-    redirect('/dashboard');
+    redirect('/admin/assets');
   }
 
   return (
