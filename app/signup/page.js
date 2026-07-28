@@ -48,7 +48,6 @@ function SignupForm() {
     }
 
     router.push('/admin/assets');
-    router.refresh();
   };
 
   return (
