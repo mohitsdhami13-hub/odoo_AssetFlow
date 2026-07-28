@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { auth } from '@/auth';
 
 export const dynamic = 'force-dynamic';
 
@@ -13,9 +14,11 @@ export async function GET() {
       NODE_ENV: process.env.NODE_ENV,
     },
     db: null,
+    auth: null,
     error: null,
   };
 
+  // Test DB connection
   try {
     const { PrismaClient } = await import('@prisma/client');
     const { PrismaPg } = await import('@prisma/adapter-pg');
@@ -25,8 +28,18 @@ export async function GET() {
     await client.$disconnect();
     results.db = `✅ Connected — ${userCount} users`;
   } catch (e) {
-    results.db = '❌ FAILED';
+    results.db = '❌ DB FAILED';
     results.error = e.message;
+  }
+
+  // Test auth() — this is the key check
+  try {
+    const session = await auth();
+    results.auth = session
+      ? `✅ Session active — ${session.user?.email} (${session.user?.role})`
+      : '❌ auth() returned null — no session (not logged in, or auth config broken)';
+  } catch (e) {
+    results.auth = `❌ auth() THREW: ${e.message}`;
   }
 
   return NextResponse.json(results, { status: 200 });
