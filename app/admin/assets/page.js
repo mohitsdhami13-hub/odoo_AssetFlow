@@ -12,13 +12,13 @@ export const metadata = {
 const WRITE_ROLES = ['ADMIN', 'ASSET_MANAGER'];
 
 export default async function AssetsPage() {
-  try {
   const session = await auth();
 
   if (!session) {
-    // redirect('/login');
+    redirect('/login');
   }
-  const canRegister = true; // Temporary mock so page renders
+
+  const canRegister = WRITE_ROLES.includes(session.user.role);
 
   // ── Fetch Dashboard KPIs ───────────────────────────────────────────
   const [
@@ -162,16 +162,4 @@ export default async function AssetsPage() {
       </div>
     </div>
   );
-  } catch (error) {
-    return (
-      <div className="p-8 text-red-600">
-        <h1 className="text-2xl font-bold mb-4">CRASH DETECTED ON PAGE</h1>
-        <pre className="bg-red-50 p-4 border border-red-200 rounded whitespace-pre-wrap">
-          {error.message}
-          {'\n\n'}
-          {error.stack}
-        </pre>
-      </div>
-    );
-  }
 }

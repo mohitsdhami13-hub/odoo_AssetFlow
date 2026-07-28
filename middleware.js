@@ -9,11 +9,9 @@ export default auth((req) => {
 
   const requiresAuth = pathname.startsWith("/admin");
   if (requiresAuth && !session) {
-    // TEMPORARY DEBUG: don't redirect, just log
-    console.log("Middleware says NO SESSION for", pathname);
-    // const loginUrl = new URL("/login", req.url);
-    // loginUrl.searchParams.set("callbackUrl", pathname);
-    // return NextResponse.redirect(loginUrl);
+    const loginUrl = new URL("/login", req.url);
+    loginUrl.searchParams.set("callbackUrl", pathname);
+    return NextResponse.redirect(loginUrl);
   }
 
   const requiresAdmin = ADMIN_ONLY_PREFIXES.some((p) => pathname.startsWith(p));
