@@ -10,6 +10,9 @@ const signupSchema = z.object({
 });
 
 export async function POST(req) {
+  return NextResponse.json({ error: "Public signup is disabled. Please contact your administrator to create an account." }, { status: 403 });
+  
+  // The rest of the code is unreachable but kept for future reference
   const body = await req.json();
   const parsed = signupSchema.safeParse(body);
 

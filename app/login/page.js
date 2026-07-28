@@ -89,10 +89,7 @@ function LoginForm() {
       </button>
 
       <p className="text-center text-sm text-slate-500">
-        No account?{' '}
-        <Link href="/signup" className="font-medium text-indigo-600 hover:text-indigo-500">
-          Sign up
-        </Link>
+        No account? Please contact your administrator.
       </p>
     </form>
   );
