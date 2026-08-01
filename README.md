@@ -1,5 +1,7 @@
 # AssetFlow — Enterprise Asset & Resource Management
 
+**🏆Selected for the Final Round of the Odoo Hackathon 2026!**
+
 > **Odoo Hackathon 2026** · Solo build · Mohit
 
 AssetFlow is a full-stack enterprise asset management system built for the Odoo Hackathon 2026. It tracks the complete lifecycle of physical assets — from registration through allocation, transfer, booking, maintenance, and audit — with role-based access control enforced at every layer.
